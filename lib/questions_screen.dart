@@ -15,7 +15,6 @@ class QuestionsScreen extends StatefulWidget {
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
   int currentQuestionIndex = 0;
-
   final List<String> selectedAnswers = [];
 
   void answerQuestion(String selectedAnswer) {
@@ -23,14 +22,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
       selectedAnswers.add(selectedAnswer);
       if (currentQuestionIndex < questions.length - 1) {
         currentQuestionIndex++;
-      } else {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) =>
-                ResultsScreen(selectedAnswers: selectedAnswers),
-          ),
-        );
+      }else{
+        Navigator.push(context,MaterialPageRoute(builder: (context) => ResultsScreen(selectedAnswers: selectedAnswers),),);
       }
     });
   }
@@ -55,20 +48,16 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                   Text(
                     currentQuestion.question,
                     style: GoogleFonts.lato(
-                        color: const Color.fromARGB(255, 201, 153, 251),
+                        color: Colors.white,
                         fontSize: 24,
                         fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 30),
-                  ...currentQuestion.getShuffledAnswers().map(
-                    (answer) {
-                      return AnswerButton(
-                          answerOption: answer,
-                          onTap: () => answerQuestion(answer));
-                      ;
-                    },
-                  )
+                  ...currentQuestion.getShuffledAnswers().map((answer) {
+                    return AnswerButton(
+                        answerOption: answer, onTap: () => answerQuestion(answer));
+                  })
                 ],
               ),
             ),
